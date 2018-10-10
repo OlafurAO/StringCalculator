@@ -1,0 +1,23 @@
+{
+  "name": "stringcalculator",
+  "version": "1.0.0",
+  "description": "This is a project for Software Engineering class at Reykjavik University",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "main": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlafurAO/StringCalculator.git"
+  },
+  "author": "Olafur Ammendrup Olafsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlafurAO/StringCalculator/issues"
+  },
+  "homepage": "https://github.com/OlafurAO/StringCalculator#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
