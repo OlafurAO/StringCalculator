@@ -1,4 +1,4 @@
-function Add(numbers){
+function Add(...numbers){
     if(numbers == ""){
         return 0;
     }
@@ -7,15 +7,32 @@ function Add(numbers){
     var result = 0;
 
     for(var i = 0; i < numbers.length; i++){
-	var currentNum = parseInt(numbers[i]);
+        var currentNum = numbers[i];
 
-	if(!isNaN(currentNum)){
-	    result += currentNum;
-            numberCount++;
+        if(currentNum.length > 1){
+            for(var j = 0; j < currentNum.length; j++){
+                var currentJNum = parseInt(currentNum[j]);
+
+                if(!isNaN(currentJNum)){
+                    result += currentJNum;
+                    numberCount++;
+                    //console.log(currentJNum);
+                }
+            }
+        }
+
+        else{
+            var currentNum = parseInt(numbers[i]);
+
+            if(!isNaN(currentNum)){
+                result += currentNum;
+                numberCount++;
+                //console.log(currentNum);
+            }
         }
     }
 
-    if(numberCount > 2 || numberCount <= 0){
+    if(numberCount <= 0){
 	   return 0;
     }
 
@@ -24,10 +41,7 @@ function Add(numbers){
     }
 }
 
-console.log(Add("")); //should return 0
-console.log(Add(".")); //should return 0
-console.log(Add("1")); //should return 1
-console.log(Add("1, 3")); //should return 4
-console.log(Add("1, , 2")); //should return 3
-console.log(Add("1 2, 3")); //should return 0 
-                            //(function should only take 0, 1 or 2 numbers)
+console.log(Add("1", "2", "1 2")); //should return 6
+console.log(Add("1", "2", "1 2", "")); //should return 6
+console.log(Add("1", "2", "1 2, 2", "")); //should return 8
+console.log(Add("1", "2", "1 2,., 2", ".")); //should return 8
