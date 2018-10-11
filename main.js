@@ -8,7 +8,6 @@ function Add(...numbers){
     }
 
     catch(error){
-        //console.log("Negatives not allowed: ");
         return "Negatives not allowed: " + FindNegativeNumbers(numbers);
     }
 }
@@ -22,8 +21,10 @@ function Calculations(numbers){
 
         if(currentNum.length > 1){
             for(var j = 0; j < currentNum.length; j++){
-                if(currentNum[j] == '-' && j < currentNum.length - 1){
-                    throw "";
+                if(currentNum[j] == '-'){
+                    if(!isNaN(parseInt(currentNum[j + 1]))){
+                        throw "";
+                    }
                 }
 
                 if(NewLineAndCommaCheck(currentNum, i, j)){
@@ -31,9 +32,25 @@ function Calculations(numbers){
                 }
             
                 var currentJNum = parseInt(currentNum[j]);
+                var nextJNum = parseInt(currentNum[j + 1]);
 
-                if(!isNaN(currentJNum)){
-                    result += currentJNum;
+                if(!isNaN(currentJNum)){   
+                    for(var k = j + 1; k < currentNum.length; k++){
+                        if(!isNaN(currentNum[k])){
+                            currentJNum = "" + currentJNum + currentNum[k];
+                            j++;
+                        }
+
+                        else{
+                            break;
+                        }
+                    }
+
+                    if(currentJNum > 1000){
+                        currentJNum = 0;
+                    }
+                    
+                    result += parseInt(currentJNum);
                     numberCount++;
                 }
             }
@@ -100,6 +117,7 @@ console.log("result: " + Add(".")); //should return 0
 console.log("result: " + Add("1")); //should return 1
 console.log("result: " + Add("1, 3")); //should return 4
 console.log("result: " + Add("1, , 2")); //should return 3
+console.log("result: " + Add("12, , 2")); //should return 14)
 console.log("result: " + Add("1 2, 3")); //should return 0 (changed in step 2)
                         
 for(var i = 0; i < 30; i ++){ 
@@ -167,12 +185,10 @@ for(var i = 0; i < 30; i ++){
 }
 
 console.log("");
-console.log("result: " + Add("-1")); //should return error
-console.log("result: " + Add("-1 -2")); //should return error
-console.log("result: " + Add("-1", "-2")); //should return error
-console.log("result: " + Add("-1", "2")); //should return error
-console.log("result: " + Add("1", "2")); //should return 3
-
+console.log("result: " + Add("1001,2")); //should return 2
+console.log("result: " + Add("21")); //should return 21
+console.log("result: " + Add("1000", "2")); //should return 1002
+console.log("result: " + Add("100,0", "2")); //should return 102
 
 for(var i = 0; i < 30; i ++){ 
     process.stdout.write("=");
